@@ -19,4 +19,7 @@ abstract class WebServices {
   Future<List<ProductModel>> getProductsByCategory(
     @Path('category_name') String categoryName,
   );
+
+  @POST('products')
+  Future<ProductModel> addProduct(@Body() ProductModel productModel);
 }

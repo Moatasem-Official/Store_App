@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/app_router.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/presentation/widgets/Home_Screen/product_card.dart';
 
@@ -46,12 +47,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
                           crossAxisCount: 2,
                           mainAxisSpacing: 16,
                           crossAxisSpacing: 16,
-                          childAspectRatio:
-                              0.5, // Adjust aspect ratio as needed
+                          childAspectRatio: 0.5,
                         ),
                     itemCount: state.products.length,
                     itemBuilder: (context, index) {
-                      return ProductCard(product: state.products[index]);
+                      return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRouter.editProductScreen,
+                            arguments: state.products[index],
+                          );
+                        },
+                        child: ProductCard(product: state.products[index]),
+                      );
                     },
                   ),
                 );
