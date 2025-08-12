@@ -19,4 +19,8 @@ class ProductRepo {
   Future<ProductModel> addProduct(ProductModel productModel) async {
     return await webServices.addProduct(productModel);
   }
+
+  Future<ProductModel> updateProduct(int id, ProductModel productModel) async {
+    return await webServices.updateProduct(id, productModel);
+  }
 }
