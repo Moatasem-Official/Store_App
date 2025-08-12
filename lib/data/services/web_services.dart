@@ -22,4 +22,10 @@ abstract class WebServices {
 
   @POST('products')
   Future<ProductModel> addProduct(@Body() ProductModel productModel);
+
+  @PUT('products/{id}')
+  Future<ProductModel> updateProduct(
+    @Path('id') int id,
+    @Body() ProductModel productModel,
+  );
 }
