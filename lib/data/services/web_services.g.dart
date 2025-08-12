@@ -85,7 +85,7 @@ class _WebServices implements WebServices {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'category/:category_name',
+            'products/category/${categoryName}',
             queryParameters: queryParameters,
             data: _data,
           )

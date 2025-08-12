@@ -26,5 +26,5 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'description': instance.description,
       'category': instance.category,
       'image': instance.image,
-      'rating': instance.rating?.toJson(),
+      'rating': instance.rating,
     };

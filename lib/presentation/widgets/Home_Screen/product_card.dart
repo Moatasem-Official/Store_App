@@ -26,6 +26,14 @@ class ProductCard extends StatelessWidget {
               fit: BoxFit.cover,
               height: 140,
               width: 140,
+              imageErrorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'assets/animations/Product Delivered.gif',
+                  height: 140,
+                  width: 140,
+                  fit: BoxFit.cover,
+                );
+              },
             ),
           ),
           const SizedBox(height: 10),

@@ -15,7 +15,7 @@ abstract class WebServices {
   @GET('categories')
   Future<List<String>> getCategories();
 
-  @GET('category/:category_name')
+  @GET('products/category/{category_name}')
   Future<List<ProductModel>> getProductsByCategory(
     @Path('category_name') String categoryName,
   );
