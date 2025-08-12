@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:store_app/app_router.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/presentation/widgets/Home_Screen/product_card.dart';
@@ -25,7 +26,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
         centerTitle: true,
         surfaceTintColor: Colors.white,
         backgroundColor: Colors.white,
-        title: const Text('Products', style: TextStyle(fontSize: 24)),
+        title: const Text(
+          'New Trend',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: Icon(FontAwesomeIcons.cartShopping, color: Colors.black),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: BlocBuilder<ProductsCubit, ProductsState>(
