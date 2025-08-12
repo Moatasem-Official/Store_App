@@ -22,7 +22,10 @@ class AppRouter {
       case editProductScreen:
         var product = settings.arguments as ProductModel;
         return MaterialPageRoute(
-          builder: (_) => EditProductScreen(product: product),
+          builder: (_) => BlocProvider<ProductsCubit>(
+            create: (context) => get_it<ProductsCubit>(),
+            child: EditProductScreen(product: product),
+          ),
         );
       default:
         return MaterialPageRoute(

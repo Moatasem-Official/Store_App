@@ -25,4 +25,19 @@ class ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+
+  copyWith({
+    required String title,
+    double? price,
+    required String description,
+    required String category,
+  }) {
+    return ProductModel(
+      title: title,
+      price: price ?? this.price,
+      description: description,
+      category: category,
+      image: image ?? image,
+    );
+  }
 }

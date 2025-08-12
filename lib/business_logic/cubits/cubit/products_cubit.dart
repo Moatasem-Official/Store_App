@@ -18,4 +18,28 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsError(message: e.toString()));
     }
   }
+
+  Future<void> updateProduct(ProductModel product, int productId) async {
+    emit(ProductsActionLoading());
+
+    try {
+      final updatedProduct = await productRepo.updateProduct(
+        productId,
+        product,
+      );
+
+      final currentState = state;
+      if (currentState is ProductsLoaded) {
+        final updatedProducts = currentState.products.map((p) {
+          return p.id == productId ? updatedProduct : p;
+        }).toList();
+
+        emit(ProductsLoaded(products: updatedProducts));
+      }
+
+      emit(ProductsActionSuccess());
+    } catch (e) {
+      emit(ProductsError(message: e.toString()));
+    }
+  }
 }
