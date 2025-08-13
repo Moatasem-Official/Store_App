@@ -7,20 +7,31 @@ part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   final ProductRepo productRepo;
+  bool _isClosed = false;
   ProductsCubit(this.productRepo) : super(ProductsInitial());
 
+  @override
+  Future<void> close() {
+    _isClosed = true;
+    return super.close();
+  }
+
+  void safeEmit(ProductsState state) {
+    if (!_isClosed) emit(state);
+  }
+
   Future<void> fetchProducts() async {
-    emit(ProductsLoading());
+    safeEmit(ProductsLoading());
     try {
       final products = await productRepo.getProducts();
-      emit(ProductsLoaded(products: products));
+      safeEmit(ProductsLoaded(products: products));
     } catch (e) {
-      emit(ProductsError(message: e.toString()));
+      safeEmit(ProductsError(message: e.toString()));
     }
   }
 
   Future<void> updateProduct(ProductModel product, int productId) async {
-    emit(ProductsActionLoading());
+    safeEmit(ProductsActionLoading());
 
     try {
       final updatedProduct = await productRepo.updateProduct(
@@ -34,12 +45,12 @@ class ProductsCubit extends Cubit<ProductsState> {
           return p.id == productId ? updatedProduct : p;
         }).toList();
 
-        emit(ProductsLoaded(products: updatedProducts));
+        safeEmit(ProductsLoaded(products: updatedProducts));
       }
 
-      emit(ProductsActionSuccess());
+      safeEmit(ProductsActionSuccess());
     } catch (e) {
-      emit(ProductsError(message: e.toString()));
+      safeEmit(ProductsError(message: e.toString()));
     }
   }
 }

@@ -59,6 +59,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       );
 
       context.read<ProductsCubit>().fetchProducts();
+      Navigator.of(context).pop(true); // Return true to indicate success
     }
   }
 

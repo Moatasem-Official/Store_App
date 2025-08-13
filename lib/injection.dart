@@ -7,7 +7,7 @@ import 'package:store_app/data/services/web_services.dart';
 final get_it = GetIt.instance;
 
 void initGetIt() {
-  get_it.registerLazySingleton<ProductsCubit>(() => ProductsCubit(get_it()));
+  get_it.registerFactory<ProductsCubit>(() => ProductsCubit(get_it()));
   get_it.registerLazySingleton<ProductRepo>(() => ProductRepo(get_it()));
   get_it.registerFactory<WebServices>(() => WebServices(createAndSetupDio()));
 }
