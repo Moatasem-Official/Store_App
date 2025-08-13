@@ -107,9 +107,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
           surfaceTintColor: Colors.white,
           backgroundColor: Colors.white,
           title: const Text('Edit Product', style: TextStyle(fontSize: 24)),
-          actions: [
-            IconButton(icon: const Icon(Icons.check), onPressed: _saveChanges),
-          ],
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -117,7 +114,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
             key: _formKey,
             child: Column(
               children: [
-                // Preview image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
