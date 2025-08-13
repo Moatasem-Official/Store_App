@@ -1,15 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
+import 'package:store_app/constants/app_strings.dart';
 import 'package:store_app/data/repos/product_repo.dart';
 import 'package:store_app/data/services/web_services.dart';
 
-final get_it = GetIt.instance;
+final getIt = GetIt.instance;
 
 void initGetIt() {
-  get_it.registerFactory<ProductsCubit>(() => ProductsCubit(get_it()));
-  get_it.registerLazySingleton<ProductRepo>(() => ProductRepo(get_it()));
-  get_it.registerFactory<WebServices>(() => WebServices(createAndSetupDio()));
+  getIt.registerFactory(() => ProductsCubit(getIt<ProductRepo>()));
+  getIt.registerLazySingleton(() => ProductRepo(getIt<WebServices>()));
+  getIt.registerSingleton(
+    () => WebServices(createAndSetupDio(), baseUrl: kStoreApiBaseUrl),
+  );
 }
 
 Dio createAndSetupDio() {

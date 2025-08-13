@@ -15,7 +15,7 @@ class AppRouter {
       case initialRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<ProductsCubit>(
-            create: (context) => get_it<ProductsCubit>()..fetchProducts(),
+            create: (context) => getIt<ProductsCubit>()..fetchProducts(),
             child: const ProductsScreen(),
           ),
         );
@@ -23,7 +23,7 @@ class AppRouter {
         var product = settings.arguments as ProductModel;
         return MaterialPageRoute(
           builder: (_) => BlocProvider<ProductsCubit>(
-            create: (context) => get_it<ProductsCubit>(),
+            create: (context) => getIt<ProductsCubit>(),
             child: EditProductScreen(product: product),
           ),
         );
