@@ -1,31 +1,32 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
+import 'package:store_app/constants/app_strings.dart';
 import 'package:store_app/data/models/product_model.dart';
 
 part 'web_services.g.dart';
 
-@RestApi(baseUrl: 'https://fakestoreapi.com/')
+@RestApi(baseUrl: kStoreApiBaseUrl)
 abstract class WebServices {
   factory WebServices(Dio dio, {String baseUrl}) = _WebServices;
 
-  @GET('products')
+  @GET(kProductsEndpoint)
   Future<List<ProductModel>> getProducts();
 
-  @GET('categories')
+  @GET(kCategoriesEndpoint)
   Future<List<String>> getCategories();
 
-  @GET('products/category/{category_name}')
+  @GET('$kProductsByCategoryEndpoint{$kProductCategoryPath}')
   Future<List<ProductModel>> getProductsByCategory(
-    @Path('category_name') String categoryName,
+    @Path(kProductCategoryPath) String categoryName,
   );
 
-  @POST('products')
+  @POST(kAddProductEndpoint)
   Future<ProductModel> addProduct(@Body() ProductModel productModel);
 
-  @PUT('products/{id}')
+  @PUT('$kUpdateProductEndpoint{$kProductIdPath}')
   Future<ProductModel> updateProduct(
-    @Path('id') int id,
+    @Path(kProductIdPath) int id,
     @Body() ProductModel productModel,
   );
 }
