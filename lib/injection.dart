@@ -8,11 +8,11 @@ import 'package:store_app/data/services/web_services.dart';
 final getIt = GetIt.instance;
 
 void initGetIt() {
-  getIt.registerFactory(() => ProductsCubit(getIt<ProductRepo>()));
-  getIt.registerLazySingleton(() => ProductRepo(getIt<WebServices>()));
   getIt.registerSingleton(
-    () => WebServices(createAndSetupDio(), baseUrl: kStoreApiBaseUrl),
+    WebServices(createAndSetupDio(), baseUrl: kStoreApiBaseUrl),
   );
+  getIt.registerLazySingleton(() => ProductRepo(getIt<WebServices>()));
+  getIt.registerFactory(() => ProductsCubit(getIt<ProductRepo>()));
 }
 
 Dio createAndSetupDio() {
