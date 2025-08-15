@@ -26,18 +26,23 @@ class ProductModel {
       _$ProductModelFromJson(json);
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 
-  copyWith({
-    required String title,
+  ProductModel copyWith({
+    int? id,
+    String? title,
     double? price,
-    required String description,
-    required String category,
+    String? description,
+    String? category,
+    String? image,
+    Rating? rating,
   }) {
     return ProductModel(
-      title: title,
+      id: id ?? this.id,
+      title: title ?? this.title,
       price: price ?? this.price,
-      description: description,
-      category: category,
-      image: image ?? image,
+      description: description ?? this.description,
+      category: category ?? this.category,
+      image: image ?? this.image,
+      rating: rating ?? this.rating,
     );
   }
 }

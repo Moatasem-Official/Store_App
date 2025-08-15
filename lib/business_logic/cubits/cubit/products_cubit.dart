@@ -34,7 +34,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     safeEmit(ProductsActionLoading());
 
     try {
-      final updatedProduct = await productRepo.updateProduct(
+      final updatedFromApi = await productRepo.updateProduct(
         productId,
         product,
       );
@@ -42,7 +42,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       final currentState = state;
       if (currentState is ProductsLoaded) {
         final updatedProducts = currentState.products.map((p) {
-          return p.id == productId ? updatedProduct : p;
+          return p.id == productId ? updatedFromApi : p;
         }).toList();
 
         safeEmit(ProductsLoaded(products: updatedProducts));

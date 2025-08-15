@@ -47,6 +47,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   void _saveChanges() async {
     if (_formKey.currentState!.validate()) {
       final updatedProduct = widget.product.copyWith(
+        id: widget.product.id!,
         title: _titleController.text,
         price: double.tryParse(_priceController.text),
         description: _descriptionController.text,
@@ -58,8 +59,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         widget.product.id!,
       );
 
-      context.read<ProductsCubit>().fetchProducts();
-      Navigator.of(context).pop(true); // Return true to indicate success
+      Navigator.of(context).pop();
     }
   }
 

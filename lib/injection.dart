@@ -18,10 +18,6 @@ void initGetIt() {
 Dio createAndSetupDio() {
   final dio = Dio();
 
-  dio
-    ..options.connectTimeout = const Duration(seconds: 1)
-    ..options.receiveTimeout = const Duration(seconds: 10);
-
   dio.interceptors.add(
     LogInterceptor(
       error: true,
