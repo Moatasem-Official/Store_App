@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/app_router.dart';
 import 'package:store_app/data/models/product_model.dart';
 
 class Helpers {
@@ -86,35 +87,59 @@ class Helpers {
                       ),
                     ],
                   ),
+                const SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 132, 132, 132),
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRouter.editProductScreen,
+                          arguments: product,
+                        );
+                      },
+                      child: const Text(
+                        'Edit',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 132, 132, 132),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add_shopping_cart,
+                        color: Colors.white,
+                      ),
+                      label: const Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
-                'Close',
-                style: TextStyle(color: Color.fromARGB(255, 132, 132, 132)),
-              ),
-            ),
-            ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
-              label: const Text(
-                'Add to Cart',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-          ],
         );
       },
     );
