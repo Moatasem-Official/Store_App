@@ -19,12 +19,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
   late TextEditingController _priceController;
   late TextEditingController _descriptionController;
   late TextEditingController _categoryController;
+  late TextEditingController _imageController;
 
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    _imageController = TextEditingController(text: widget.product.image);
     _titleController = TextEditingController(text: widget.product.title);
     _priceController = TextEditingController(
       text: widget.product.price?.toString() ?? '',
@@ -41,16 +43,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _priceController.dispose();
     _descriptionController.dispose();
     _categoryController.dispose();
+    _imageController.dispose();
     super.dispose();
   }
 
   void _saveChanges() async {
     if (_formKey.currentState!.validate()) {
       final updatedProduct = widget.product.copyWith(
-        id: widget.product.id!,
+        id: widget.product.id,
         title: _titleController.text,
         price: double.tryParse(_priceController.text),
         description: _descriptionController.text,
+        image: _imageController.text,
         category: _categoryController.text,
       );
 
@@ -58,8 +62,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
         updatedProduct,
         widget.product.id!,
       );
-
-      Navigator.of(context).pop();
+      Navigator.pop(context);
     }
   }
 
@@ -115,19 +118,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
             key: _formKey,
             child: Column(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    widget.product.image!,
-                    height: 200,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      height: 200,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported, size: 50),
-                    ),
+                TextFormField(
+                  controller: _imageController,
+                  decoration: const InputDecoration(
+                    labelText: 'Image URL',
+                    border: OutlineInputBorder(),
                   ),
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Please enter an image URL'
+                      : null,
                 ),
                 const SizedBox(height: 20),
 

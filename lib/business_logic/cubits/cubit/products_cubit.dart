@@ -53,4 +53,14 @@ class ProductsCubit extends Cubit<ProductsState> {
       safeEmit(ProductsError(message: e.toString()));
     }
   }
+
+  Future<void> addProduct(ProductModel product) async {
+    safeEmit(ProductsActionLoading());
+    try {
+      await productRepo.addProduct(product);
+      safeEmit(ProductsActionSuccess());
+    } catch (e) {
+      safeEmit(ProductsError(message: e.toString()));
+    }
+  }
 }

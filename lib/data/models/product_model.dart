@@ -33,7 +33,6 @@ class ProductModel {
     String? description,
     String? category,
     String? image,
-    Rating? rating,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -42,7 +41,6 @@ class ProductModel {
       description: description ?? this.description,
       category: category ?? this.category,
       image: image ?? this.image,
-      rating: rating ?? this.rating,
     );
   }
 }

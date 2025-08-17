@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:store_app/app_router.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/helpers/helpers.dart';
 import 'package:store_app/presentation/widgets/Home_Screen/product_card.dart';

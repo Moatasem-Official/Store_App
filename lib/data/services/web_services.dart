@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:store_app/constants/app_strings.dart';
@@ -25,6 +25,7 @@ abstract class WebServices {
   Future<ProductModel> addProduct(@Body() ProductModel productModel);
 
   @PUT('$kUpdateProductEndpoint{$kProductIdPath}')
+  @Headers(<String, String>{"Content-Type": "application/json"})
   Future<ProductModel> updateProduct(
     @Path(kProductIdPath) int id,
     @Body() ProductModel productModel,

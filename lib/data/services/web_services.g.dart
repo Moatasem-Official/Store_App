@@ -136,11 +136,17 @@ class _WebServices implements WebServices {
   Future<ProductModel> updateProduct(int id, ProductModel productModel) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(productModel.toJson());
     final _options = _setStreamType<ProductModel>(
-      Options(method: 'PUT', headers: _headers, extra: _extra)
+      Options(
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/json',
+          )
           .compose(
             _dio.options,
             'products/${id}',
