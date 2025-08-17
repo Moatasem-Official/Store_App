@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/data/models/product_model.dart';
+import 'package:store_app/presentation/widgets/Edit_Screen/custom_edit_form.dart';
 
 class EditProductScreen extends StatefulWidget {
   const EditProductScreen({super.key, required this.product});
@@ -114,101 +115,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _imageController,
-                  decoration: const InputDecoration(
-                    labelText: 'Image URL',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter an image URL'
-                      : null,
-                ),
-                const SizedBox(height: 20),
-
-                // Title
-                TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(
-                    labelText: 'Product Title',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter a title'
-                      : null,
-                ),
-                const SizedBox(height: 16),
-
-                // Price
-                TextFormField(
-                  controller: _priceController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'Price',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter a price'
-                      : null,
-                ),
-                const SizedBox(height: 16),
-
-                // Description
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: const InputDecoration(
-                    labelText: 'Description',
-                    border: OutlineInputBorder(),
-                  ),
-                  maxLines: 3,
-                  validator: (value) => value == null || value.isEmpty
-                      ? 'Please enter a description'
-                      : null,
-                ),
-                const SizedBox(height: 16),
-
-                // Category
-                TextFormField(
-                  controller: _categoryController,
-                  decoration: const InputDecoration(
-                    labelText: 'Category',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                // Save button
-                SizedBox(
-                  width: double.infinity,
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    onPressed: _saveChanges,
-                    color: Colors.teal,
-                    textColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: _isLoading
-                        ? SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: const CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 3,
-                            ),
-                          )
-                        : const Text(
-                            'Save Changes',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                  ),
-                ),
-              ],
-            ),
+          child: CustomEditForm(
+            formKey: _formKey,
+            titleController: _titleController,
+            priceController: _priceController,
+            descriptionController: _descriptionController,
+            categoryController: _categoryController,
+            imageController: _imageController,
+            onSave: _saveChanges,
+            isLoading: _isLoading,
           ),
         ),
       ),
