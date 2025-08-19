@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/helpers/helpers.dart';
@@ -53,17 +54,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
               } else {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: 16,
-                          childAspectRatio: 0.7,
-                        ),
+                  child: MasonryGridView.count(
                     itemCount: state.products.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {

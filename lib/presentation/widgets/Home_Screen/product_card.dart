@@ -19,8 +19,16 @@ class _ProductCardState extends State<ProductCard> {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 255, 247, 247),
         borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(255, 202, 227, 227).withOpacity(0.8),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -32,13 +40,9 @@ class _ProductCardState extends State<ProductCard> {
               placeholder: 'assets/animations/Product Delivered.gif',
               image: widget.product.image ?? '',
               fit: BoxFit.cover,
-              height: 140,
-              width: 140,
               imageErrorBuilder: (context, error, stackTrace) {
                 return Image.asset(
                   'assets/animations/Product Delivered.gif',
-                  height: 140,
-                  width: 140,
                   fit: BoxFit.cover,
                 );
               },
