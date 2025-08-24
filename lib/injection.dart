@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:store_app/app_bloc_observer.dart';
 import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/constants/app_strings.dart';
 import 'package:store_app/data/repos/product_repo.dart';

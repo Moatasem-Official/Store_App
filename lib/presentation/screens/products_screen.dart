@@ -6,19 +6,8 @@ import 'package:store_app/business_logic/cubits/cubit/products_cubit.dart';
 import 'package:store_app/helpers/helpers.dart';
 import 'package:store_app/presentation/widgets/Home_Screen/product_card.dart';
 
-class ProductsScreen extends StatefulWidget {
+class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
-
-  @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
-}
-
-class _ProductsScreenState extends State<ProductsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<ProductsCubit>(context).fetchProducts();
-  }
 
   @override
   Widget build(BuildContext context) {
